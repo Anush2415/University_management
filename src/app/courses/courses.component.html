@@ -1,0 +1,34 @@
+<section id="courses" class="hidden backs">
+  <h2>Courses</h2>
+  <select (change)="fetchCourse($event)">
+    <option value="">Select Course Type</option>
+    <option value="UG">Undergraduate</option>
+    <option value="PG">Postgraduate</option>
+  </select>
+  <div id="undergraduate" class="sub-section hidden">
+    <h2>Undergraduate Courses</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>COURSE_ID</th>
+          <th>DEPARTMENT_ID</th>
+          <th>COURSE_NAME</th>
+        </tr>
+      </thead>
+      <tbody id="ug_course_table_body"></tbody>
+    </table>
+  </div>
+  <div id="postgraduate" class="sub-section hidden">
+    <h2>Postgraduate Courses</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>COURSE_ID</th>
+          <th>DEPARTMENT_ID</th>
+          <th>COURSE_NAME</th>
+        </tr>
+      </thead>
+      <tbody id="pg_course_table_body"></tbody>
+    </table>
+  </div>
+</section>

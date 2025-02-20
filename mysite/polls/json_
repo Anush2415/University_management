@@ -1,0 +1,11 @@
+[
+  {
+    "action_code":"I",
+    "faculty_id":"F1",
+    "department_id":"D1",
+    "first_name":"Krishnan",
+    "lastname":"k",
+    "email":"krishna@chanakya.edu.in",
+    "role":"proffesor"
+  }
+]

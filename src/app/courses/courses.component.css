@@ -1,0 +1,40 @@
+.backs {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .sub-section {
+    margin-top: 20px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #f01717;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #333;
+    color: white;
+  }
+  

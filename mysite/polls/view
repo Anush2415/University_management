@@ -1,0 +1,71 @@
+class Manage_Student(View):
+    def post(self, request):
+        action_code = request.POST.get("action_code", '')
+        resp = {}
+
+        if action_code == 'I':
+            try:
+                data = Student(
+                    first_name=request.POST.get("first_name", ''),
+                    last_name=request.POST.get("last_name", ''),
+                    email_id=request.POST.get("email_id", ''),
+                    student_id=request.POST.get("student_id", ''),
+                    course_id_id=request.POST.get("course_id", '')  # Note the use of course_id_id
+                )
+                data.save(using='studentdb')
+                resp['status'] = 'Success'
+                resp['status_code'] = '200'
+            except Exception as e:
+                resp['status'] = 'Failed'
+                resp['status_code'] = '400'
+                resp['error'] = str(e)
+
+        elif action_code == 'U':
+            try:
+                data = Student.objects.using('studentdb').filter(
+                    student_id=request.POST.get("student_id", '')
+                ).update(email_id=request.POST.get("email_id", ''))
+                resp['status'] = 'Success'
+                resp['status_code'] = '200'
+            except Exception as e:
+                resp['status'] = 'Failed'
+                resp['status_code'] = '400'
+                resp['error'] = str(e)
+
+        elif action_code == 'D':
+            try:
+                data = Student.objects.using('studentdb').filter(
+                    student_id=request.POST.get("student_id", '')
+                ).delete()
+                if data[0] > 0:
+                    resp['status'] = 'Success'
+                    resp['status_code'] = '200'
+                else:
+                    resp['status'] = 'Failed'
+                    resp['status_code'] = '404'
+                    resp['error'] = 'Student not found'
+            except Exception as e:
+                resp['status'] = 'Failed'
+                resp['status_code'] = '400'
+                resp['error'] = str(e)
+
+        else:
+            resp['status'] = 'Failed'
+            resp['status_code'] = '400'
+            resp['error'] = 'Invalid action code'
+
+        return HttpResponse(json.dumps(resp), content_type='application/json')
+
+    def get(self, request):
+        try:
+            result = Student.objects.using('studentdb').filter(
+                student_id=request.GET.get("student_id", '')
+            )
+            return HttpResponse(json.dumps(list(result.values()), cls=DjangoJSONEncoder), content_type='application/json')
+        except Exception as e:
+            resp = {
+                'status': 'Failed',
+                'status_code': '400',
+                'error': str(e)
+            }
+            return HttpResponse(json.dumps(resp), content_type='application/json')
